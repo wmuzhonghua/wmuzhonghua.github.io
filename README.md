@@ -2,7 +2,7 @@
 
 ## 当前展示调整（2026-11-04）
 
-- GitHub 源码仓库为 `wmuzhonghua/wmuzhonghua.github.io`，默认分支为 `main`；原始简历、未展示的稿件笔记、本地依赖、构建缓存和环境变量文件不纳入版本管理。本次完成生产构建检查；GitHub Pages 在线部署尚未配置。
+- GitHub 源码仓库为 `wmuzhonghua/wmuzhonghua.github.io`，默认分支为 `main`；原始简历、未展示的稿件笔记、本地依赖、构建缓存和环境变量文件不纳入版本管理。已配置 GitHub Actions 自动构建与 GitHub Pages 部署，首次发布验证中。
 - 缩小首页顶部留白：外层顶部间距设为 32px，主介绍区域顶部间距设为 16px，让文字与眼睛插画整体上移。
 - 移除首页顶部“HEALTHCARE ACCESS · ENVIRONMENT · HEALTH”英文标语。
 - 左上角站点名称更新为“Zhonghua Lu's Portfolio”，保留首页链接并适配窄屏；首页三个单位全部加粗，移除眼睛下方的姓名拼音。
@@ -77,7 +77,7 @@ npm run preview
 
 ## 部署配置
 
-发布前设置 `SITE_URL` 为自己的站点域名。若发布到 GitHub 项目子目录（例如 `/portfolio/`），同时设置 `BASE_PATH=/portfolio/`；默认根路径为 `/`。项目内导航及图标都读取该路径。将 `npm run build` 生成的 `dist/` 部署到静态托管服务即可；目前尚未上传或发布。
+发布前设置 `SITE_URL` 为自己的站点域名。若发布到 GitHub 项目子目录（例如 `/portfolio/`），同时设置 `BASE_PATH=/portfolio/`；默认根路径为 `/`。项目内导航及图标都读取该路径。将 `npm run build` 生成的 `dist/` 部署到静态托管服务即可。当前已上传源码并配置 `.github/workflows/deploy.yml`：推送到 `main` 后自动构建、发布至 https://wmuzhonghua.github.io/ ，研究页为 https://wmuzhonghua.github.io/research/ 。
 
 ## 进度（2026-11-04）
 
