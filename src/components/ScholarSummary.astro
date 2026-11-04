@@ -1,21 +1,23 @@
 ---
+import T from '../components/T.astro';
 import { scholar } from '../data/scholar';
 import { profile } from '../data/profile';
 const maxCitations = Math.max(...scholar.annualCitations.map(item => item.count));
+const updatedEnglish = new Date(`${scholar.updatedAt}T00:00:00Z`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 ---
 <section class="scholar-summary" aria-labelledby="scholar-heading">
   <div class="scholar-heading">
     <h2 id="scholar-heading"><a href={profile.socials[0].url} target="_blank" rel="noopener noreferrer">Google Scholar ↗</a></h2>
-    <p>更新于 <time datetime={scholar.updatedAt}>{scholar.updatedLabel}</time></p>
+    <p><T text="更新于" en="Updated" /> <time datetime={scholar.updatedAt}><T text={scholar.updatedLabel} en={updatedEnglish} /></time></p>
   </div>
   <div class="scholar-content">
     <dl class="scholar-metrics">
-      <div><dt>总引用</dt><dd>{scholar.citations}</dd></div>
-      <div><dt>h 指数</dt><dd>{scholar.hIndex}</dd></div>
-      <div><dt>i10 指数</dt><dd>{scholar.i10Index}</dd></div>
+      <div><dt><T text="总引用" en="Citations" /></dt><dd>{scholar.citations}</dd></div>
+      <div><dt><T text="h 指数" en="h-index" /></dt><dd>{scholar.hIndex}</dd></div>
+      <div><dt><T text="i10 指数" en="i10-index" /></dt><dd>{scholar.i10Index}</dd></div>
     </dl>
     <figure class="scholar-chart">
-      <figcaption>每年引用次数</figcaption>
+      <figcaption><T text="每年引用次数" en="Citations per year" /></figcaption>
       <ol>{scholar.annualCitations.map(item => <li>
         <div class="citation-track"><div class="citation-bar" style={`height: ${item.count / maxCitations * 100}%`}><span class="citation-count">{item.count}</span></div></div>
         <span class="citation-year">{item.year}</span>

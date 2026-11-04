@@ -1,0 +1,6 @@
+---
+import { english } from '../i18n/translations';
+interface Props { text: string; en?: string; }
+const { text, en = english(text) } = Astro.props;
+---
+<span data-i18n data-zh={text} data-en={en}>{text}</span>

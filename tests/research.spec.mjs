@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import fs from 'node:fs';
 const papers = JSON.parse(fs.readFileSync(new URL('../src/data/research-papers.json', import.meta.url), 'utf8'));
-test.use({ channel: 'chrome' });
+test.use({ channel: 'chrome', locale: 'zh-CN' });
 test('research shows a concise author-sorted list with working abstracts and permalinks', async ({ page }) => {
   const errors=[]; page.on('pageerror', error=>errors.push(error.message));
   await page.goto('http://127.0.0.1:4321/research/');
@@ -45,7 +45,7 @@ test('research shows a concise author-sorted list with working abstracts and per
   await expect(page.locator('.paper-sources, .metric-correction, .metrics-explanation')).toHaveCount(0);
   await expect(page.locator('main')).not.toContainText('Sources & notes');
   await expect(page.locator('#pmid-38219541 .paper-metrics dd').last()).toHaveText('10.3（2023 数据年，2024 年发布）。');
-  await expect(page.locator('.page-heading h1')).toHaveText('Publications.');
+  await expect(page.locator('.page-heading h1')).toHaveText('论文发表.');
   await expect(page.locator('.page-heading a')).toHaveCount(0);
   await expect(page.locator('.scholar-heading a')).toContainText('Google Scholar');
   await expect(page.locator('.page-heading .eyebrow, .page-heading p, .research-overview, .paper-controls, #results-count, #no-results, .legacy-manuscripts')).toHaveCount(0);

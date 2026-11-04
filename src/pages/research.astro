@@ -1,4 +1,5 @@
 ---
+import T from '../components/T.astro';
 import Layout from '../layouts/Layout.astro';
 import ScholarSummary from '../components/ScholarSummary.astro';
 import { publications } from '../data/publications';
@@ -39,17 +40,17 @@ function displayMetrics(paper: (typeof publications)[number]) {
 ---
 <Layout title="Research" active="research">
   <div class="page-shell research-shell">
-    <div class="page-heading"><h1>Publications<span class="title-dot">.</span></h1></div>
+    <div class="page-heading"><h1><T text="论文发表" en="Publications" /><span class="title-dot">.</span></h1></div>
     <ScholarSummary />
     <div class="papers-list">
       {sortedPublications.map(paper => <article class="paper-record" id={`pmid-${paper.pmid}`}>
-        <div class="paper-topline"><span class="paper-year-badge">{paper.year}</span><span>{paper.venue}</span>{paper.role && <span class="paper-role">{paper.role}</span>}</div>
+        <div class="paper-topline"><span class="paper-year-badge">{paper.year}</span><span><T text={paper.venue} /></span>{paper.role && <span class="paper-role"><T text={paper.role} /></span>}</div>
         <h2 lang="en">{paper.title}</h2><p class="paper-title-zh" lang="zh-CN">{paper.titleZh}</p>
         {paper.authors && <p class="authors">{paper.authors}</p>}
-        <p class="paper-citation">{paper.citation}</p><p class="paper-dates">{paper.dates}</p>
-        <div class="paper-identifiers"><a href={paper.url} target="_blank" rel="noopener noreferrer">PMID: {paper.pmid} ↗</a><a href={`https://doi.org/${paper.doi}`} target="_blank" rel="noopener noreferrer">DOI: {paper.doi} ↗</a><a href={`#pmid-${paper.pmid}`} aria-label={`论文固定链接：${paper.titleZh}`}>#</a></div>
-        <dl class="paper-metrics">{displayMetrics(paper).map(metric=><div><dt>{metric.label}</dt><dd>{metric.value}</dd></div>)}</dl>
-        <details class="paper-abstract"><summary><span>中英文摘要（归纳）</span><span lang="en">Abstract summaries</span></summary><div class="abstract-columns"><section lang="zh-CN"><h3>中文摘要 <span>归纳</span></h3><p>{paper.abstractZh}</p></section><section lang="en"><h3>English abstract <span>Summary</span></h3><p>{paper.abstractEn}</p></section></div><a class="text-link" href={paper.url} target="_blank" rel="noopener noreferrer">查看原始摘要 / Original abstract on PubMed ↗</a></details>
+        <p class="paper-citation"><T text={paper.citation} /></p><p class="paper-dates"><T text={paper.dates} /></p>
+        <div class="paper-identifiers"><a href={paper.url} target="_blank" rel="noopener noreferrer">PMID: {paper.pmid} ↗</a><a href={`https://doi.org/${paper.doi}`} target="_blank" rel="noopener noreferrer">DOI: {paper.doi} ↗</a><a href={`#pmid-${paper.pmid}`} aria-label={`论文固定链接：${paper.titleZh}`} data-aria-zh={`论文固定链接：${paper.titleZh}`} data-aria-en={`Permalink: ${paper.title}`}>#</a></div>
+        <dl class="paper-metrics">{displayMetrics(paper).map(metric=><div><dt><T text={metric.label} /></dt><dd><T text={metric.value} /></dd></div>)}</dl>
+        <details class="paper-abstract"><summary><T text="中英文摘要（归纳）" en="Abstract summary" /></summary><div class="abstract-columns"><section lang="zh-CN"><h3>中文摘要 <span>归纳</span></h3><p>{paper.abstractZh}</p></section><section lang="en"><h3><T text="英文摘要" en="English abstract" /> <span><T text="归纳" en="Summary" /></span></h3><p>{paper.abstractEn}</p></section></div><a class="text-link" href={paper.url} target="_blank" rel="noopener noreferrer"><T text="在 PubMed 查看原始摘要 ↗" en="Original abstract on PubMed ↗" /></a></details>
       </article>)}
     </div>
   </div>

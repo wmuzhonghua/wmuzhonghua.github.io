@@ -1,0 +1,87 @@
+// English translations of the supplied Chinese content; publication titles remain as published.
+const en: Record<string, string> = {
+  '医疗可及性与环境健康研究': 'Healthcare Access & Environmental Health Research',
+  '温州医科大学眼视光学院': 'School of Ophthalmology and Optometry, Wenzhou Medical University',
+  '视觉健康全国重点实验室': 'State Key Laboratory of Eye Health',
+  '眼和视光疾病国家临床医学研究中心': 'National Clinical Research Center for Ocular Diseases',
+  '我关注医疗可及性，以及环境暴露如何影响人群健康，重点研究眼健康与生殖健康。结合流行病学与多组学方法，探索人群健康差异及其影响因素。': 'My research focuses on healthcare access and how environmental exposures affect population health, with particular interests in eye health and reproductive health. I combine epidemiology and multi-omics to investigate health disparities and their determinants.',
+  '医疗可及性': 'Healthcare access', '环境暴露': 'Environmental exposures', '眼健康': 'Eye health', '生殖健康': 'Reproductive health',
+  '医学博士 · 流行病与卫生统计学': 'PhD in Medicine · Epidemiology and Biostatistics',
+  '理学学士 · 卫生检验与检疫': 'BSc · Health Inspection and Quarantine',
+  '厦门大学': 'Xiamen University', '武汉科技大学': 'Wuhan University of Science and Technology',
+  '空气污染暴露影响人群健康的分子流行病学研究': 'Molecular epidemiology of the effects of air pollution on population health',
+  '人群队列 · 多组学 · 动物实验': 'Population cohorts · Multi-omics · Animal studies',
+  '利用湖北省精子库与孝感出生队列的健康数据，以及精子、胎盘和胎便样本，结合小鼠实验，通过 UPLC-HRMS 平台开展非靶向代谢组学和蛋白质组学分析，研究空气污染暴露的健康效应及分子机制。': 'Investigated the health effects and molecular mechanisms of air pollution using health data and sperm, placental and meconium samples from the Hubei Human Sperm Bank and Xiaogan Birth Cohort, together with mouse experiments and untargeted metabolomics and proteomics on a UPLC-HRMS platform.',
+  '非靶向小分子化合物全流程分析平台的应用与再开发': 'Application and further development of an end-to-end platform for untargeted small-molecule analysis',
+  '覆盖样本前处理、质谱检测、数据处理、分子鉴定和生物信息学分析。主导 Metabolomics Expert 的概念设计、技术验证、软件开发、内部验证、联合试点与产业合作，并开发 AI 辅助代谢物注释 R 程序包 MetaboliteAnnotator。': 'Work spans sample preparation, mass spectrometry, data processing, molecular identification and bioinformatics. Led the concept design, technical validation, software development, internal validation, collaborative pilots and industry partnerships for Metabolomics Expert, and developed MetaboliteAnnotator, an R package for AI-assisted metabolite annotation.',
+  '研究方法与数据分析': 'Research Methods & Data Analysis',
+  '环境与分子流行病学、系统流行病学': 'Environmental, molecular and systems epidemiology',
+  '人群队列研究与动物实验': 'Population cohort studies and animal experiments',
+  '非靶向代谢组学、蛋白质组学及生物信息学分析': 'Untargeted metabolomics, proteomics and bioinformatics',
+  'AI 辅助化合物名称匹配与数据库注释': 'AI-assisted compound name matching and database annotation',
+  '实验平台与工具开发': 'Experimental Platforms & Tool Development',
+  '生物样本前处理与完整代谢组学数据工作流': 'Biospecimen preparation and complete metabolomics workflows',
+  'R 程序包开发与代谢组学分析软件开发': 'R package and metabolomics software development',
+  '厦门大学“南强优秀博士生培育计划”': 'Nanqiang Outstanding Doctoral Student Development Program, Xiamen University',
+  '厦门大学 · 连续两年入选，学院每年遴选 2 人': 'Xiamen University · Selected in two consecutive years; two recipients per year in the school',
+  '腾讯奖学金（高层次应用型公共卫生人才培养项目）': 'Tencent Scholarship for the Advanced Applied Public Health Talent Training Program',
+  '教育部学位管理与研究生教育司 · 全国 250 人，厦门大学 5 人': 'Department of Degree Management and Postgraduate Education, Ministry of Education · 250 recipients nationwide, including five at Xiamen University',
+  '黄仲咸奖学金': 'Huang Zhongxian Scholarship',
+  '厦门大学三好学生': 'Outstanding Student, Xiamen University',
+  '十佳优秀学生奖学金': 'Top Ten Outstanding Students Scholarship',
+  '厦门大学公共卫生学院 · 全院遴选 10 人': 'School of Public Health, Xiamen University · Ten recipients across the school',
+  '武汉科技大学优秀学生': 'Outstanding Student, Wuhan University of Science and Technology',
+  '武汉科技大学学业奖学金': 'Academic Scholarship, Wuhan University of Science and Technology',
+  '湖北省医学虚拟仿真实验技能大赛一等奖': 'First Prize, Hubei Medical Virtual Simulation Experimental Skills Competition',
+  '湖北省生理学会': 'Hubei Physiological Society',
+  '武汉科技大学“互联网+”创新创业大赛金奖': 'Gold Award, Internet Plus Innovation and Entrepreneurship Competition, Wuhan University of Science and Technology',
+  '武汉科技大学 · 组长': 'Wuhan University of Science and Technology · Team leader',
+  '武汉科技大学第八届化学技能竞赛一等奖': 'First Prize, 8th Chemistry Skills Competition, Wuhan University of Science and Technology',
+  '砷致肝脏糖脂代谢紊乱促发/加重妊娠期糖尿病的机理及干预研究': 'Mechanisms and interventions for arsenic-induced hepatic glucose and lipid dysregulation in the onset and exacerbation of gestational diabetes',
+  '国家自然科学基金面上项目': 'National Natural Science Foundation of China · General Program',
+  '消毒副产物暴露对男性精子发育的影响及 DNA 甲基化的介导作用': 'Effects of disinfection by-product exposure on sperm development and the mediating role of DNA methylation',
+  '国家自然科学基金青年基金项目': 'National Natural Science Foundation of China · Young Scientists Fund',
+  '胆红素-花生四烯酸代谢通路调节炎症介质网络对慢性肾脏病进展影响机制研究': 'Mechanisms linking the bilirubin–arachidonic acid pathway, inflammatory mediator networks and chronic kidney disease progression',
+  '福建省自然科学基金面上项目': 'Natural Science Foundation of Fujian Province · General Program',
+  '基于老年纵向队列研究 PM2.5 组分与慢性肾病的关联及分子机理': 'Associations and molecular mechanisms linking PM2.5 constituents to chronic kidney disease in a longitudinal cohort of older adults',
+  '基于厦门灌口老年人队列研究血清 Adropin 水平在糖尿病和糖尿病肾病中的预测价值和早期预测模型': 'Predictive value of serum adropin and early prediction models for diabetes and diabetic nephropathy in the Xiamen Guankou cohort of older adults',
+  '福建省科技厅引导性项目': 'Guidance Project, Fujian Provincial Department of Science and Technology',
+  '非靶向小分子化合物全流程分析软件': 'End-to-end software for untargeted small-molecule analysis',
+  '项目负责人 / 主要完成人': 'Project lead / Principal contributor',
+  '将数据导入、谱图格式转换、特征提取、MS/MS 谱图匹配、数据标准化与 AI 辅助分析串联为完整的非靶向分析工作流。': 'An integrated untargeted analysis workflow covering data import, spectral format conversion, feature extraction, MS/MS spectral matching, data normalization and AI-assisted analysis.',
+  '主导概念设计、关键技术验证、软件开发与内部多轮验证，推进对外联合试点和产业合作。': 'Led concept design, key technology validation, software development and multiple rounds of internal validation, while advancing collaborative pilots and industry partnerships.',
+  '与日本岛津、杭州谱育等仪器厂商签订战略合作协议。': 'Established strategic cooperation agreements with instrument manufacturers including Shimadzu in Japan and Hangzhou Puyu.',
+  '简历记录版本：v0.2.2': 'Version recorded in CV: v0.2.2',
+  '质谱数据分析': 'Mass spectrometry data analysis', 'MS/MS 匹配': 'MS/MS matching', 'AI 辅助分析': 'AI-assisted analysis',
+  'AI 辅助代谢物注释 R 程序包': 'An R package for AI-assisted metabolite annotation',
+  '开发与研究 · 相关论文第一作者': 'Development & Research · First author of the associated paper',
+  '支持无偏向输入化合物名称，结合大语言模型进行名称匹配，对接 PubChem、HMDB、KEGG 等数据库，辅助完成全面的代谢物注释。': 'Supports flexible compound-name input and uses large language models for name matching, connecting to PubChem, HMDB and KEGG to assist comprehensive metabolite annotation.',
+  '将 AI 辅助名称匹配与多数据库注释整合，减少化合物名称差异带来的注释困难。': 'Combines AI-assisted name matching with annotation across multiple databases to reduce difficulties caused by differences in compound names.',
+  '相关论文于 2026 年发表于 Journal of Proteome Research，25(3):1775–1780。': 'The associated paper was published in Journal of Proteome Research in 2026, 25(3):1775–1780.',
+  '代谢物注释': 'Metabolite annotation', '大语言模型': 'Large language models',
+  '第一作者': 'First author', '共同第一作者': 'Co-first author', '第二作者': 'Second author', '第三作者': 'Third author', '第四作者': 'Fourth author', '第五作者': 'Fifth author', '第六作者': 'Sixth author', '第六作者以后': 'Later author',
+  '中科院分组': 'CAS journal ranking', '影响因子': 'Journal impact factor', '暂无数据。': 'Not available.',
+};
+
+// These replacements cover the structured dates and journal metrics in the supplied bibliography.
+const terms: [string, string][] = [
+  ['色谱（Chinese Journal of Chromatography）', 'Chinese Journal of Chromatography'],
+  ['公共卫生、环境卫生与职业卫生', 'Public, Environmental & Occupational Health'],
+  ['环境科学与生态学', 'Environmental Sciences & Ecology'], ['生化与分子生物学', 'Biochemistry & Molecular Biology'],
+  ['生化研究方法', 'Biochemical Research Methods'], ['医学：研究与实验', 'Medicine, Research & Experimental'],
+  ['医学：内科', 'Medicine, General & Internal'], ['工程：环境', 'Environmental Engineering'],
+  ['综合性期刊', 'Multidisciplinary Sciences'], ['细胞生物学', 'Cell Biology'], ['分析化学', 'Analytical Chemistry'],
+  ['环境科学', 'Environmental Sciences'], ['毒理学', 'Toxicology'], ['生物学', 'Biology'], ['医学', 'Medicine'], ['化学', 'Chemistry'],
+  ['大类：', 'Broad category: '], ['小类：', 'Subject categories: '],
+  ['首次在线 / 发布：', 'First online / released: '], ['卷期日期：', 'Issue date: '],
+  ['官网发布日期：', 'Website release date: '], ['出版日期：', 'Publication date: '], ['发表：', 'Published: '],
+];
+export function english(text: string): string {
+  if (en[text]) return en[text];
+  let result = text.replace(/(\d{4}) 数据年，(\d{4}) 年发布/g, '$1 data, released in $2')
+    .replace(/(\d) 区/g, 'Tier $1').replace(/(\d{4}) 年/g, '$1');
+  for (const [zh, translation] of terms) result = result.split(zh).join(translation);
+  result = result.replace(/；/g, '; ').replace(/。/g, '.').replace(/（/g, ' (').replace(/）/g, ')').replace(/、/g, ', ');
+  if (/\p{Script=Han}/u.test(result)) throw new Error(`Missing English translation: ${text}`);
+  return result;
+}
