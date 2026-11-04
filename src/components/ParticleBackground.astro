@@ -1,0 +1,134 @@
+<div class="particle-background" aria-hidden="true"><canvas id="particle-canvas"></canvas></div>
+<script>
+  const canvas = document.querySelector<HTMLCanvasElement>('#particle-canvas');
+  const ctx = canvas?.getContext('2d');
+  if (canvas && ctx) {
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    const contrast = matchMedia('(forced-colors: active), (prefers-contrast: more)');
+    const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+    const systemTheme = matchMedia('(prefers-color-scheme: dark)');
+    type Particle = { x: number; y: number; depth: number; size: number; alpha: number; phase: number; ox: number; oy: number; vx: number; vy: number; sx: number; sy: number };
+    let particles: Particle[] = [];
+    let width = 0, height = 0, frame = 0, last = 0, time = 0;
+    let scroll = window.scrollY;
+    let previous: { x: number; y: number; time: number } | null = null;
+    let sprites: HTMLCanvasElement[] = [];
+    const wrap = (value: number, size: number) => ((value % size) + size) % size;
+
+    function updatePalette() {
+      const style = getComputedStyle(canvas!);
+      sprites = ['--particle-color', '--particle-highlight'].map(name => {
+        const sprite = document.createElement('canvas');
+        sprite.width = sprite.height = 32;
+        const paint = sprite.getContext('2d')!;
+        const color = style.getPropertyValue(name).trim();
+        const gradient = paint.createRadialGradient(16, 16, 0, 16, 16, 16);
+        gradient.addColorStop(0, color);
+        gradient.addColorStop(0.2, color);
+        gradient.addColorStop(1, 'transparent');
+        paint.fillStyle = gradient;
+        paint.fillRect(0, 0, 32, 32);
+        return sprite;
+      });
+      draw(0);
+    }
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      canvas!.width = Math.round(width * ratio);
+      canvas!.height = Math.round(height * ratio);
+      ctx!.setTransform(ratio, 0, 0, ratio, 0, 0);
+      // Stable distribution across reloads; fewer particles on small screens.
+      let seed = 417;
+      const random = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; };
+      const count = Math.min(1600, Math.max(140, Math.round(width * height / 1300)));
+      particles = Array.from({ length: count }, () => {
+        const x = random(), y = random(), depth = random();
+        return { x, y, depth, size: random() > .95 ? 5 + random() * 2 : 1 + random() ** 2 * 3, alpha: .25 + random() * .5, phase: random() * Math.PI * 2, ox: 0, oy: 0, vx: 0, vy: 0, sx: x * width, sy: y * height };
+      });
+      previous = null;
+      draw(0);
+    }
+
+    function draw(dt: number) {
+      ctx!.clearRect(0, 0, width, height);
+      if (contrast.matches) return;
+      const motion = !reducedMotion.matches;
+      scroll += (window.scrollY - scroll) * (dt ? 1 - Math.exp(-8 * dt) : 1);
+      for (const particle of particles) {
+        const damping = Math.exp(-(2 + particle.depth) * dt);
+        particle.vx *= damping;
+        particle.vy *= damping;
+        particle.ox = (particle.ox + particle.vx * dt) * Math.exp(-.12 * dt);
+        particle.oy = (particle.oy + particle.vy * dt) * Math.exp(-.12 * dt);
+        const drift = motion ? 4 + particle.depth * 8 : 0;
+        particle.sx = wrap(particle.x * width + particle.ox + Math.sin(time * .35 + particle.phase) * drift + 12, width + 24) - 12;
+        particle.sy = wrap(particle.y * height + particle.oy + Math.cos(time * .25 + particle.phase) * drift - (motion ? scroll * (.025 + particle.depth ** 2 * .055) : 0) + 12, height + 24) - 12;
+        ctx!.globalAlpha = particle.alpha * (motion ? .88 + .12 * Math.sin(time * .6 + particle.phase) : 1);
+        const sprite = sprites[particle.depth > .75 ? 1 : 0];
+        if (sprite) ctx!.drawImage(sprite, particle.sx - particle.size / 2, particle.sy - particle.size / 2, particle.size, particle.size);
+      }
+      ctx!.globalAlpha = 1;
+    }
+
+    function tick(now: number) {
+      frame = 0;
+      if (document.hidden || reducedMotion.matches || contrast.matches) return;
+      if (!last || now - last >= 1000 / 30) {
+        const dt = last ? Math.min((now - last) / 1000, .06) : 0;
+        last = now;
+        time += dt;
+        draw(dt);
+      }
+      frame = requestAnimationFrame(tick);
+    }
+    function restart() {
+      cancelAnimationFrame(frame);
+      frame = last = 0;
+      previous = null;
+      if (document.hidden) return;
+      if (reducedMotion.matches) for (const p of particles) p.vx = p.vy = p.ox = p.oy = 0;
+      draw(0);
+      if (!reducedMotion.matches && !contrast.matches) frame = requestAnimationFrame(tick);
+    }
+
+    window.addEventListener('pointermove', event => {
+      if (event.pointerType !== 'mouse' || !finePointer.matches || reducedMotion.matches || contrast.matches || document.hidden) return;
+      const point = { x: event.clientX, y: event.clientY, time: event.timeStamp };
+      const from = previous;
+      previous = point;
+      if (!from || point.time - from.time > 150) return;
+      const dx = point.x - from.x, dy = point.y - from.y;
+      const lengthSquared = dx * dx + dy * dy;
+      if (lengthSquared < .1) return;
+      const speedLimit = Math.min(1, 60 / Math.sqrt(lengthSquared));
+      for (const p of particles) {
+        // Distance to the entire cursor segment prevents gaps on fast movement.
+        const along = Math.max(0, Math.min(1, ((p.sx - from.x) * dx + (p.sy - from.y) * dy) / lengthSquared));
+        const distance = Math.hypot(p.sx - from.x - dx * along, p.sy - from.y - dy * along);
+        const influence = Math.max(0, 1 - distance / 100) ** 2;
+        const force = influence * speedLimit * 6 / (.8 + p.depth);
+        p.vx += dx * force;
+        p.vy += dy * force;
+        const cap = Math.min(1, 240 / Math.max(1, Math.hypot(p.vx, p.vy)));
+        p.vx *= cap;
+        p.vy *= cap;
+      }
+    }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', () => { previous = null; });
+    window.addEventListener('blur', () => { previous = null; });
+    window.addEventListener('resize', resize, { passive: true });
+    document.addEventListener('visibilitychange', restart);
+    window.addEventListener('pagehide', () => cancelAnimationFrame(frame));
+    window.addEventListener('pageshow', restart);
+    reducedMotion.addEventListener('change', restart);
+    contrast.addEventListener('change', restart);
+    systemTheme.addEventListener('change', updatePalette);
+    new MutationObserver(updatePalette).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    updatePalette();
+    resize();
+    restart();
+  }
+</script>

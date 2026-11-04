@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ScholarSummary from '../components/ScholarSummary.astro';
+import { publications } from '../data/publications';
+const authorPriority: Record<string, number> = {
+  '第一作者': 0,
+  '共同第一作者': 1,
+  '第二作者': 2,
+  '第三作者': 3,
+  '第四作者': 4,
+  '第五作者': 5,
+  '第六作者': 6,
+  '第六作者以后': 7,
+};
+const firstAuthorJournalPriority: Record<string, number> = {
+  'Environmental Science & Technology': 0,
+  'Journal of Hazardous Materials': 1,
+  'Journal of Proteome Research': 2,
+  'BMC Medicine': 3,
+};
+// 优先按作者位次排列；第一作者内按指定期刊顺序，同刊保留原有时间倒序。
+const sortedPublications = [...publications].sort((a, b) => {
+  const roleOrder = (authorPriority[a.role] ?? 99) - (authorPriority[b.role] ?? 99);
+  if (roleOrder !== 0) return roleOrder;
+  if (a.role === '第一作者' || a.role === '共同第一作者') {
+    return (firstAuthorJournalPriority[a.venue] ?? 99) - (firstAuthorJournalPriority[b.venue] ?? 99);
+  }
+  return 0;
+});
+function displayMetrics(paper: (typeof publications)[number]) {
+  const cas = paper.metrics.find(metric => metric.label.startsWith('中科院历史参考'))
+    ?? paper.metrics.find(metric => metric.label.startsWith('中科院分区'));
+  const jif = paper.metrics.find(metric => metric.label === '发表当年发布的 JIF（对照口径）');
+  return [
+    { label: '中科院分组', value: cas?.value ?? '暂无数据。' },
+    { label: '影响因子', value: jif?.value ?? '暂无数据。' },
+  ];
+}
+---
+<Layout title="Research" active="research">
+  <div class="page-shell research-shell">
+    <div class="page-heading"><h1>Publications<span class="title-dot">.</span></h1></div>
+    <ScholarSummary />
+    <div class="papers-list">
+      {sortedPublications.map(paper => <article class="paper-record" id={`pmid-${paper.pmid}`}>
+        <div class="paper-topline"><span class="paper-year-badge">{paper.year}</span><span>{paper.venue}</span>{paper.role && <span class="paper-role">{paper.role}</span>}</div>
+        <h2 lang="en">{paper.title}</h2><p class="paper-title-zh" lang="zh-CN">{paper.titleZh}</p>
+        {paper.authors && <p class="authors">{paper.authors}</p>}
+        <p class="paper-citation">{paper.citation}</p><p class="paper-dates">{paper.dates}</p>
+        <div class="paper-identifiers"><a href={paper.url} target="_blank" rel="noopener noreferrer">PMID: {paper.pmid} ↗</a><a href={`https://doi.org/${paper.doi}`} target="_blank" rel="noopener noreferrer">DOI: {paper.doi} ↗</a><a href={`#pmid-${paper.pmid}`} aria-label={`论文固定链接：${paper.titleZh}`}>#</a></div>
+        <dl class="paper-metrics">{displayMetrics(paper).map(metric=><div><dt>{metric.label}</dt><dd>{metric.value}</dd></div>)}</dl>
+        <details class="paper-abstract"><summary><span>中英文摘要（归纳）</span><span lang="en">Abstract summaries</span></summary><div class="abstract-columns"><section lang="zh-CN"><h3>中文摘要 <span>归纳</span></h3><p>{paper.abstractZh}</p></section><section lang="en"><h3>English abstract <span>Summary</span></h3><p>{paper.abstractEn}</p></section></div><a class="text-link" href={paper.url} target="_blank" rel="noopener noreferrer">查看原始摘要 / Original abstract on PubMed ↗</a></details>
+      </article>)}
+    </div>
+  </div>
+  <script>
+    function revealHash() {
+      const target = document.getElementById(location.hash.slice(1));
+      if (target?.matches('.paper-record')) {
+        target.querySelector<HTMLDetailsElement>('.paper-abstract')!.open = true;
+        target.scrollIntoView();
+      }
+    }
+    window.addEventListener('hashchange', revealHash);
+    revealHash();
+  </script>
+</Layout>

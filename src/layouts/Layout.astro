@@ -1,0 +1,50 @@
+---
+import ParticleBackground from '../components/ParticleBackground.astro';
+import { profile } from '../data/profile';
+import '../styles/global.css';
+const { title, active = 'home' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const nav = [['home', '', 'Home'], ['research', 'research/', 'Research'], ['project', 'project/', 'Project'], ['cv', 'cv/', 'CV']];
+---
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={`${profile.chineseName}（${profile.name}）的个人学术网站：${profile.institution}，关注医疗可及性、环境暴露与人群眼健康、生殖健康。`} />
+  <meta name="theme-color" content="#faf9f5" />
+  <title>{title} · {profile.name}</title>
+  <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+  <script is:inline>
+    try { const theme = localStorage.getItem('theme'); if (theme === 'dark' || theme === 'light') document.documentElement.dataset.theme = theme; } catch {}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳转到正文</a>
+  <div class="ambient" aria-hidden="true"></div>
+  <ParticleBackground />
+  <header class="site-header">
+    <nav class="nav-wrap" aria-label="主导航">
+      <a class="brand" href={base}><span class="brand-icon">✳</span><span>{profile.name}'s Portfolio</span></a>
+      <div class="nav-actions">
+        <div class="nav-links">{nav.map(([key, path, label]) => <a href={`${base}${path}`} aria-current={active === key ? 'page' : undefined}>{label}</a>)}</div>
+        <label class="theme-control"><span aria-hidden="true">◐</span><select id="theme" aria-label="选择配色主题"><option value="system">跟随系统</option><option value="light">浅色</option><option value="dark">深色</option></select></label>
+      </div>
+    </nav>
+  </header>
+  <main id="main"><slot /></main>
+  <footer><div class="footer-inner"><p>© {new Date().getFullYear()} {profile.name}. <span class="footer-note">Made with curiosity.</span></p><div class="socials">{profile.socials.filter(s => s.url).map(s => <a href={s.url} target="_blank" rel="noopener noreferrer">{s.label} ↗</a>)}<a href={`${base}cv/#contact`}>Contact ↗</a></div></div></footer>
+  <script>
+    const select = document.querySelector<HTMLSelectElement>('#theme');
+    if (select) {
+      select.value = document.documentElement.dataset.theme || 'system';
+      select.addEventListener('change', () => {
+        const mode = select.value;
+        if (mode === 'system') delete document.documentElement.dataset.theme;
+        else document.documentElement.dataset.theme = mode;
+        try { localStorage.setItem('theme', mode); } catch {}
+      });
+    }
+  </script>
+</body>
+</html>

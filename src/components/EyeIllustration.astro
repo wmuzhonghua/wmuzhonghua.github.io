@@ -1,0 +1,44 @@
+---
+const irisFibers = Array.from({ length: 64 }, (_, index) => {
+  const angle = index * Math.PI / 32;
+  const inner = 35 + (index % 4) * 2;
+  const outer = 66 - (index % 3) * 3;
+  return {
+    x1: 200 + Math.cos(angle) * inner,
+    y1: 180 + Math.sin(angle) * inner,
+    x2: 200 + Math.cos(angle) * outer,
+    y2: 180 + Math.sin(angle) * outer,
+  };
+});
+---
+<svg class="eye-illustration" viewBox="0 0 400 360" role="img" aria-labelledby="eye-title">
+  <title id="eye-title">眼睛插画，象征眼健康研究</title>
+  <defs>
+    <radialGradient id="iris-warmth">
+      <stop offset="0%" stop-color="var(--accent)" stop-opacity=".08" />
+      <stop offset="70%" stop-color="var(--accent)" stop-opacity=".24" />
+      <stop offset="100%" stop-color="var(--accent)" stop-opacity=".06" />
+    </radialGradient>
+  </defs>
+  <g fill="none" stroke="var(--line)" stroke-width="1">
+    <circle cx="200" cy="180" r="156" stroke-dasharray="3 6" opacity=".65" />
+    <circle cx="200" cy="180" r="132" opacity=".65" />
+    <path d="M200 12v19m0 298v19M32 180H13m355 0h19" />
+    <path d="M46 157Q200 12 354 157M46 204Q200 337 354 204" opacity=".65" />
+  </g>
+  <path d="M27 180Q200-8 373 180Q200 368 27 180Z" fill="var(--glass)" stroke="var(--accent)" stroke-width="1.8" />
+  <circle cx="200" cy="180" r="73" fill="url(#iris-warmth)" stroke="var(--accent)" stroke-width="1.3" />
+  <circle cx="200" cy="180" r="67" fill="none" stroke="var(--accent)" stroke-opacity=".3" />
+  <g stroke="var(--accent)" stroke-width="1" opacity=".55">
+    {irisFibers.map(fiber => <line {...fiber} />)}
+  </g>
+  <circle cx="200" cy="180" r="31" fill="#262624" stroke="var(--accent)" stroke-opacity=".3" />
+  <circle cx="189" cy="168" r="8" fill="#faf9f5" opacity=".92" />
+  <circle cx="211" cy="191" r="3" fill="#faf9f5" opacity=".55" />
+  <circle cx="310" cy="69" r="4" fill="var(--accent)" />
+  <circle cx="310" cy="69" r="10" fill="none" stroke="var(--accent)" stroke-opacity=".2" />
+</svg>
+
+<style>
+  .eye-illustration{display:block;width:100%;max-width:400px;height:auto;overflow:visible}
+</style>

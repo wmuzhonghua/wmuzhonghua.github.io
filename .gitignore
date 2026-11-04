@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+test-results/
+.env
+.env.*
+!.env.example
+# Local source material and unpublished manuscript notes
+卢忠华_简历整理.md
+src/data/manuscripts.json

@@ -1,0 +1,92 @@
+{
+  "42777345": {
+    "authors": "Rui Guo, Miao Zhu, Fei Huang, Feng Cheng, Zhonghua Lu, Song Xu, Li He, Guang Xu, Heng Wang, Jie Zhang",
+    "role": "第五作者",
+    "featured": false
+  },
+  "42606525": {
+    "authors": "Jing Li, Biling Gao, Hao Chang, Jingjing Zhan, Zhonghua Lu, Zehua Xu, Yi Lin, Jiaqing Li, Heqing Shen",
+    "role": "第五作者",
+    "featured": false
+  },
+  "42224848": {
+    "authors": "Song Xu, Haixia Zhou, Ying-Jun Chen, Heng-Gui Chen, Bin Sun, Zhong-Hua Lu, Tian-Qing Meng, Chen-Liang Xiong, Yi-Xin Wang, Jie Zhang",
+    "role": "第六作者",
+    "featured": false
+  },
+  "41005528": {
+    "authors": "Jun-Feng Tan, Li-Li Huang, Zhong-Hua Lu, Hang-Yu Xiang, Hong Yang, Hai-Xia Zhou, Tian-Qing Meng, Cheng-Liang Xiong, Yi-Xin Wang, Jie Zhang",
+    "role": "第三作者",
+    "featured": false
+  },
+  "35246141": {
+    "authors": "Tang, C., Jiang, H., Zhao, B., Lin, Y., Lin, S., Chen, T., Su, Y., Zhang, Y., Zhou, L., Li, L., Lin, J., Lu, Z.H., Wang, Y., Zhao, Z., Liu, L., Wang, Y., Zhang, J., Shen, H.",
+    "role": "第六作者以后",
+    "featured": false
+  },
+  "37591176": {
+    "authors": "Lu, Z.H., Sun, B., Wang, Y.X., Zhang, J. et al.",
+    "role": "第一作者",
+    "featured": true
+  },
+  "37673188": {
+    "authors": "Zhang, Y., Tang, C., Liu, Y., Jiang, H., Lu, J., Lu, Z.H., Xu, L., Zhang, S., Zhou, L., Ye, J., Xuan, X., Wu, T., Cao, X., Zhao, B., Lin, L., Wang, Y., Zhang, J.",
+    "role": "第六作者",
+    "featured": false
+  },
+  "38219541": {
+    "authors": "Liang, S., Lu, Z.H., Cai, L., Zhu, M., Zhou, H., Zhang, J.",
+    "role": "第二作者",
+    "featured": false
+  },
+  "38461778": {
+    "authors": "Lu, W., Jiang, C., Chen, Y., Lu, Z.H., Xu, X., Zhu, L., Xi, H., Ye, G., Yan, C., Chen, J., Zhang, J., Zuo, L., Huang, Q.",
+    "role": "第四作者",
+    "featured": false
+  },
+  "38729510": {
+    "authors": "Chang, H., Zhang, X., Lu, Z.H., Gao, B., Shen, H.",
+    "role": "第三作者",
+    "featured": false
+  },
+  "38819024": {
+    "authors": "Lu, Z.H., Liu, C., Wang, Y.X., Zhang, J. et al.",
+    "role": "第一作者",
+    "featured": true
+  },
+  "39449509": {
+    "authors": "Chen, Y.J., Lu, Z.H., Liang, S.J., Zhang, J.",
+    "role": "第二作者",
+    "featured": false
+  },
+  "39593059": {
+    "authors": "Tang, C.#, Zhang, Y.#, Yi, J.#, Lu, Z.H.#, Zhang, S., Wang, Y., Zhang, J. et al.",
+    "role": "共同第一作者",
+    "featured": true
+  },
+  "40280061": {
+    "authors": "Chang, H.#, Pan, K.#, Zhang, X., Lu, Z.H., Wang, Y., Liu, D., Lin, Y., Wu, Y., Lin, Y., Huang, Q., Duan, J., Sun, Z., Zhao, J., Shen, H.",
+    "role": "第四作者",
+    "featured": false
+  },
+  "40615526": {
+    "authors": "Li, Y., Lu, Z.H., Li, J., Cheng, L., Ye, Y., Xu, S., Tan, J., Zheng, L., Xie, H., Zhong, Q., Liu, J., Yang, Y., Guo, R., Liu, G.",
+    "role": "第二作者",
+    "featured": false
+  },
+  "41045665": {
+    "authors": "Lu, Z.H., Liu, C., Wang, Y.X., Zhang, J. et al.",
+    "role": "第一作者",
+    "featured": true
+  },
+  "41266286": {
+    "authors": "Chang, H., Zhang, X., Lu, Z.H., Lin, Y.*, Shen, H.Q.*",
+    "role": "第三作者",
+    "featured": false
+  },
+  "41691569": {
+    "authors": "Lu, Z.H., Tang, C., Zhang, J. et al.",
+    "role": "第一作者",
+    "featured": false
+  }
+}
